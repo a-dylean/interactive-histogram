@@ -1,32 +1,41 @@
 "use client";
-
 import { Box, SelectChangeEvent } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-} from "recharts";
+import { BarChart } from "./barChart";
 
-function convertArray(sourceArray: { [key: string]: number }[]) {
+const convertArray = (sourceArray: { [key: string]: number }[]) => {
   const sourceObject = sourceArray[0];
   const resultArray = [];
   for (const key in sourceObject) {
-    resultArray.push({ name: key, pv: sourceObject[key] });
+    resultArray.push(sourceObject[key]);
   }
   return resultArray;
-}
+};
 
+const makeLabels = (sourceArray: { [key: string]: number }[]) => {
+  const sourceObject = sourceArray[0];
+  const resultArray = [];
+  for (const key in sourceObject) {
+    resultArray.push(key);
+  }
+  return resultArray;
+};
+
+// const datasets: ChartData <'bar', {key: string, value: number} []> = {
+//   datasets: [{
+//     data: [{key: 'Sales', value: 20}, {key: 'Revenue', value: 10}],
+//     parsing: {
+//       xAxisKey: 'key',
+//       yAxisKey: 'value'
+//     }
+//   }],
+// };
 export default function Histogram() {
   const [time, setTime] = useState("month");
-  const [data, setData] = useState();
-
+  const [data, setData] = useState({ datasets: [] });
   const handleSelectChange = (event: SelectChangeEvent) => {
     setTime(event.target.value);
   };
-
   useEffect(() => {
     const fetchData = async (time: string) => {
       const res = await fetch(
@@ -37,22 +46,55 @@ export default function Histogram() {
       }
       const data = await res.json();
       const dataYear = convertArray(data.map((item) => item.graph.year));
+      const labelsYear = makeLabels(data.map((item) => item.graph.year));
       const data6months = convertArray(
         data.map((item) => item.graph.half_year)
       );
-      const dataMonth = convertArray(data.map((item) => item.graph.month));
+      const labels6months = makeLabels(
+        data.map((item) => item.graph.half_year)
+      );
+      const dataMonths = convertArray(data.map((item) => item.graph.month));
+      const labelsMonth = makeLabels(data.map((item) => item.graph.month));
       switch (time) {
         case "month":
-          setData(dataMonth);
+          setData({
+            labels: labelsMonth,
+            datasets: [
+              {
+                data: dataMonths,
+              },
+            ],
+          });
           break;
         case "year":
-          setData(dataYear);
+          setData({
+            labels: labelsYear,
+            datasets: [
+              {
+                data: dataYear,
+              },
+            ],
+          });
           break;
         case "6months":
-          setData(data6months);
+          setData({
+            labels: labels6months,
+            datasets: [
+              {
+                data: data6months,
+              },
+            ],
+          });
           break;
         default:
-          setData(dataMonth);
+          setData({
+            labels: ["mar", "bar"],
+            datasets: [
+              {
+                data: dataMonth,
+              },
+            ],
+          });
           break;
       }
     };
@@ -61,7 +103,12 @@ export default function Histogram() {
 
   return (
     <>
-      <select value={time} onChange={handleSelectChange}>
+      <select
+        h-12
+        flex-shrink-0
+        value={time.toString()}
+        onChange={handleSelectChange}
+      >
         <option selected value="month">
           За последний месяц
         </option>
@@ -76,22 +123,7 @@ export default function Histogram() {
           borderRadius: "27px",
         }}
       >
-        <BarChart
-          width={995}
-          height={400}
-          data={data}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Bar dataKey="pv" fill="#000AFF" />
-        </BarChart>
+        <BarChart chartData={data} />
       </Box>
     </>
   );
