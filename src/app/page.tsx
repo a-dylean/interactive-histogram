@@ -1,17 +1,13 @@
-"use client";
 import ".//styles/globals.css";
 import Histogram from "./histogram";
-import Dropdown from "./dropdown";
-import { Box, Container } from "@mui/material";
+import { Container } from "@mui/material";
 
-export default function Page() {
+export default function Home() {
   return (
-     <Container><main>
-     
-      <Dropdown/>
-      <Box sx={{ background: "#FF00F50D" }}>
-      <Histogram/>
-      </Box>
-    </main></Container>
+    <Container>
+      <main>
+        <Histogram />
+      </main>
+    </Container>
   );
 }

@@ -10,13 +10,11 @@ export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
- // histogram: React.ReactNode
 }) {
   return (
     <html lang="en">
       <body>
       {children}
-      {/* {props.histogram} */}
       </body>
     </html>
   )
