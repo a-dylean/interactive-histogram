@@ -106,10 +106,10 @@ export default function Histogram() {
       <select
         h-12
         flex-shrink-0
-        value={time.toString()}
+        value="month"
         onChange={handleSelectChange}
       >
-        <option selected value="month">
+        <option value="month">
           За последний месяц
         </option>
         <option value="year">За последний год</option>

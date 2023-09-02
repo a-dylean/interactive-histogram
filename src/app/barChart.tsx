@@ -34,7 +34,9 @@ export const BarChart = ({ chartData }) => {
               titleMarginBottom: 0,
               callbacks: {
                 label: () => "",
-                title: () => "5600", //map through, smth like this datachartData.map(item => item.datasets[item]?.data[2])
+                title(tooltipItems) {
+                  return tooltipItems[0].parsed.y;
+                },
               },
             },
           },
@@ -44,7 +46,7 @@ export const BarChart = ({ chartData }) => {
               suggestedMin: 0,
               ticks: {
                 stepSize: 1000,
-                count: 6
+                count: 6,
               },
               grid: {
                 display: false,
