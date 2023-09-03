@@ -25,3 +25,10 @@ body {
     )
     rgb(var(--background-start-rgb));
 } */
+
+@font-face {
+  font-family: "korenski";
+  src: url('../../../public/fonts/korenski.ttf');
+  font-weight: normal;
+  font-style: normal;
+}

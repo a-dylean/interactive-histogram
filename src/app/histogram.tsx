@@ -39,7 +39,7 @@ export default function Histogram() {
   useEffect(() => {
     const fetchData = async (time: string) => {
       const res = await fetch(
-        "https://3947907b-86cb-4229-9398-0cf217626417.mock.pstmn.io/get_graph"
+        "https://acba574b-449e-4482-8f82-e31330094fdf.mock.pstmn.io/get_data"
       );
       if (!res.ok) {
         throw new Error("Failed to fetch data");
