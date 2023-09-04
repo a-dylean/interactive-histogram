@@ -2,15 +2,12 @@ import { Bar } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
 import "./styles/globals.css";
 Chart.register(...registerables);
-Chart.defaults.backgroundColor = "#9BD0F5";
 Chart.defaults.borderColor = "#000";
 Chart.defaults.color = "#000";
-Chart.defaults.font.family = "Korenski";
-
+Chart.defaults.font.family = "Manrope";
 export const BarChart = ({ chartData }) => {
+
   return (
-    <>
-      <div className="chart-container">
         <Bar
           data={chartData}
           options={{
@@ -19,8 +16,7 @@ export const BarChart = ({ chartData }) => {
             borderSkipped: false,
             backgroundColor: "#000AFF",
             layout: {
-              // padding: 50,
-              // bottom: 50
+              padding: 30,
             },
             plugins: {
               title: {
@@ -53,9 +49,7 @@ export const BarChart = ({ chartData }) => {
                   callback: (value, index, values) => {
                     if (chartData?.labels?.length > 0) {
                       const max = Math.max(...chartData.datasets[0].data);
-                      console.log(max);
                         const step = Math.round((Math.ceil(max / 5) / 100)) *100;
-                        console.log(step)
                         if (value % step === 0) {
                         return value.toString();
                       } else {
@@ -109,7 +103,5 @@ export const BarChart = ({ chartData }) => {
             },
           }}
         />
-      </div>
-    </>
   );
 };

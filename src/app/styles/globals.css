@@ -26,7 +26,12 @@ body {
     rgb(var(--background-start-rgb));
 } */
 
-
 html {
-  font-family: var(--font-noto-sans);
+  font-family: var(--font-manrope);
 }
+
+.main {
+  font-family: var(--font-manrope);
+}
+
+@import url(https://fonts.googleapis.com/css2?family=Manrope);

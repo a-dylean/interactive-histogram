@@ -1,11 +1,16 @@
 import { createTheme } from "@mui/material";
-import { Noto_Sans } from 'next/font/google';
-//import "./globals.css";
+import { Manrope } from "next/font/google";
+
+const manrope = Manrope({
+    subsets: ['latin'],
+    display: 'swap',
+  })
 
 export const theme = createTheme({
-//   typography: {
-//     fontFamily: "Noto_Sans",
-//   },
+  typography: {
+    //fontFamily: 'inherit',
+    fontFamily: manrope.style.fontFamily
+  },
   components: {
     MuiList: {
       styleOverrides: {
@@ -49,26 +54,36 @@ export const theme = createTheme({
           "&.Mui-selected": {
             backgroundColor: "#FFF",
             borderRadius: "28px",
+            background: "none"
           },
           "&:hover": {
             backgroundColor: "#FFF",
             borderRadius: "28px",
+            background: "none"
           },
           "&.Mui-selected.Mui-focusVisible": {
             backgroundColor: "#FFF",
             borderRadius: "28px",
+            background: "none"
           },
           "&.Mui-selected:hover": {
             backgroundColor: "#FFF",
             borderRadius: "28px",
+            background: "none"
           },
+          "&Mui-focused": {
+            background: "none"
+          }
         },
       },
     },
     MuiList: {
       styleOverrides: {
         root: {
-          border: "2px solid #000AFF",
+          borderLeft: "2px solid #000AFF",
+          borderRight: "2px solid #000AFF",
+          borderBottom: "2px solid #000AFF",
+          //borderTop: "1px solid #000AFF",
           borderRadius: "28px",
         },
       },

@@ -1,13 +1,11 @@
-import './/styles/globals.css'
 import type { Metadata } from 'next'
-import { Noto_Sans } from 'next/font/google';
+import { Manrope } from 'next/font/google';
 import ThemeRegistry from "./themeRegistry";
 
-const noto = Noto_Sans({
-  subsets: ['latin', 'cyrillic'],
+const manrope = Manrope({
+  subsets: ['latin'],
   display: 'swap',
-  weight: '400',
-  variable: '--font-noto-sans'
+  variable: '--font-manrope',
 })
 
 export const metadata: Metadata = {
@@ -21,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={noto.className}>
+    <html lang="en" className={manrope.className}>
       <body>
       <ThemeRegistry options={{ key: 'mui' }}>
         {children}
