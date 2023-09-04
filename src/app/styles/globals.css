@@ -26,9 +26,12 @@ body {
     rgb(var(--background-start-rgb));
 } */
 
-@font-face {
-  font-family: "korenski";
-  src: url('../../../public/fonts/korenski.ttf');
-  font-weight: normal;
-  font-style: normal;
+/* #example2 {
+  border-radius: 28px;
+  border: 2px solid #000AFF;
+  background: #FFF;
+} */
+
+html {
+  font-family: var(--font-noto-sans);
 }

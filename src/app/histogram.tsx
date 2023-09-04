@@ -1,8 +1,18 @@
 "use client";
-import { Box, SelectChangeEvent } from "@mui/material";
+import {
+  Box,
+  FormControl,
+  InputBase,
+  Menu,
+  MenuItem,
+  MenuList,
+  Select,
+  SelectChangeEvent,
+  styled,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { BarChart } from "./barChart";
-
+import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
 const convertArray = (sourceArray: { [key: string]: number }[]) => {
   const sourceObject = sourceArray[0];
   const resultArray = [];
@@ -31,15 +41,15 @@ const makeLabels = (sourceArray: { [key: string]: number }[]) => {
 //   }],
 // };
 export default function Histogram() {
-  const [time, setTime] = useState("month");
+  const [period, setPeriod] = useState("month");
   const [data, setData] = useState({ datasets: [] });
   const handleSelectChange = (event: SelectChangeEvent) => {
-    setTime(event.target.value);
+    setPeriod(event.target.value);
   };
   useEffect(() => {
-    const fetchData = async (time: string) => {
+    const fetchData = async (period: string) => {
       const res = await fetch(
-        "https://acba574b-449e-4482-8f82-e31330094fdf.mock.pstmn.io/get_data"
+        "https://1f2051ac-491b-4190-b2cb-1bc2e080b6ed.mock.pstmn.io/get_data"
       );
       if (!res.ok) {
         throw new Error("Failed to fetch data");
@@ -55,7 +65,7 @@ export default function Histogram() {
       );
       const dataMonths = convertArray(data.map((item) => item.graph.month));
       const labelsMonth = makeLabels(data.map((item) => item.graph.month));
-      switch (time) {
+      switch (period) {
         case "month":
           setData({
             labels: labelsMonth,
@@ -88,33 +98,38 @@ export default function Histogram() {
           break;
         default:
           setData({
-            labels: ["mar", "bar"],
+            labels: labelsMonth,
             datasets: [
               {
-                data: dataMonth,
+                data: dataMonths,
               },
             ],
           });
           break;
       }
     };
-    fetchData(time);
-  }, [time]);
+    fetchData(period);
+  }, [period]);
 
   return (
     <>
-      <select
-        h-12
-        flex-shrink-0
-        value="month"
-        onChange={handleSelectChange}
+      <FormControl hiddenLabel 
+      margin="dense"
       >
-        <option value="month">
-          За последний месяц
-        </option>
-        <option value="year">За последний год</option>
-        <option value="6months">За последние 6 месяцев</option>
-      </select>
+        <Select
+          IconComponent={ExpandMoreRoundedIcon}
+          onChange={handleSelectChange}
+          value={period}
+          labelId="select-period-label"
+          id="select-period-label"
+          label=""
+        >
+          <MenuItem value={"month"}
+          >За последний месяц</MenuItem>
+          <MenuItem value={"year"}>За последний год</MenuItem>
+          <MenuItem value={"6months"}>За последние 6 месяцев</MenuItem>
+        </Select>
+      </FormControl>
       <Box
         sx={{
           width: "100%",

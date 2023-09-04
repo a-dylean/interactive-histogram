@@ -1,20 +1,18 @@
 import { Bar } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
-import { korenski } from "../../public/fonts/fonts";
-import { getRandomValues } from "crypto";
-import moment from "moment";
-import "moment/locale/ru";
-import "chartjs-adapter-moment";
-
-moment.locale("ru");
 
 Chart.register(...registerables);
 Chart.defaults.backgroundColor = "#9BD0F5";
 Chart.defaults.borderColor = "#000";
 Chart.defaults.color = "#000";
-//Chart.defaults.font = korenski;
+Chart.defaults.font.family ='Noto Sans';
 
 export const BarChart = ({ chartData }) => {
+  // if (chartData) {
+  //   console.log(Math.max(chartData.datasets[0]?.data || 0))
+  //   console.log(chartData.datasets[0].data)
+
+  // }
   return (
     <div className="chart-container">
       <Bar
@@ -55,18 +53,22 @@ export const BarChart = ({ chartData }) => {
           scales: {
             y: {
               beginAtZero: true,
-              type: 'logarithmic',
-              suggestedMax: 10000,
+              //type: 'logarithmic',
+              //suggestedMax: value,
               suggestedMin: 0,
+              // ticks: {
+              //   //maxTicksLimit: 21, 
+              //   //stepSize: value ,
+              //   // callback: (value, index, values) => {
+              //   //   if (value === 0 || value == 500 || value == 1000 || value == 2000 || value == 5000 || value == 10000) {
+              //   //     return value.toString();
+              //   //   }
+              //   // },
+              // },
               ticks: {
-                maxTicksLimit: 21, 
-                stepSize: 500,
-                callback: (value, index, values) => {
-                  if (value === 0 || value == 500 || value == 1000 || value == 2000 || value == 5000 || value == 10000) {
-                    return value.toString();
-                  }
-                },
-              },
+                //beginAtZero: true,
+                stepSize: 2000,
+            },
               grid: {
                 display: false,
               },

@@ -1,6 +1,14 @@
 import './/styles/globals.css'
 import type { Metadata } from 'next'
-import { korenski } from '../../public/fonts/fonts'
+import { Noto_Sans } from 'next/font/google';
+import ThemeRegistry from "./themeRegistry";
+
+const noto = Noto_Sans({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: '400',
+  variable: '--font-noto-sans'
+})
 
 export const metadata: Metadata = {
   title: 'Interactive histogram',
@@ -13,9 +21,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={korenski.className}>
+    <html lang="en" className={noto.className}>
       <body>
-      {children}
+      <ThemeRegistry options={{ key: 'mui' }}>{children}</ThemeRegistry>
       </body>
     </html>
   )
