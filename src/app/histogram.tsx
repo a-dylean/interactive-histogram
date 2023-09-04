@@ -50,7 +50,7 @@ export default function Histogram() {
   useEffect(() => {
     const fetchData = async (period: string) => {
       const res = await fetch(
-        "https://1f2051ac-491b-4190-b2cb-1bc2e080b6ed.mock.pstmn.io/get_data"
+        "https://f41618c6-475f-4571-a168-d95adc69a846.mock.pstmn.io/get_data"
       );
       if (!res.ok) {
         throw new Error("Failed to fetch data");
@@ -115,7 +115,7 @@ export default function Histogram() {
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "right", paddingBottom: 2 }}>
-        <FormControl hiddenLabel margin="dense">
+        hello 1234<FormControl hiddenLabel margin="dense">
           <Select
             IconComponent={ExpandMoreRoundedIcon}
             onChange={handleSelectChange}

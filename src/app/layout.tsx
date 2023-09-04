@@ -4,7 +4,7 @@ import { Noto_Sans } from 'next/font/google';
 import ThemeRegistry from "./themeRegistry";
 
 const noto = Noto_Sans({
-  subsets: ['latin'],
+  subsets: ['latin', 'cyrillic'],
   display: 'swap',
   weight: '400',
   variable: '--font-noto-sans'
@@ -23,7 +23,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={noto.className}>
       <body>
-      <ThemeRegistry options={{ key: 'mui' }}>{children}</ThemeRegistry>
+      <ThemeRegistry options={{ key: 'mui' }}>
+        {children}
+        </ThemeRegistry>
       </body>
     </html>
   )

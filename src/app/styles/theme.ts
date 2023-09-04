@@ -1,6 +1,11 @@
 import { createTheme } from "@mui/material";
+import { Noto_Sans } from 'next/font/google';
+//import "./globals.css";
+
 export const theme = createTheme({
-  shadows: ["none"],
+//   typography: {
+//     fontFamily: "Noto_Sans",
+//   },
   components: {
     MuiList: {
       styleOverrides: {
@@ -69,9 +74,16 @@ export const theme = createTheme({
       },
     },
     MuiMenu: {
+      styleOverrides: {
+        paper: {
+          borderRadius: "28px",
+        },
+      },
+    },
+    MuiPaper: {
         styleOverrides: {
-            paper: {
-                borderRadius: "28px"
+            root: {
+                boxShadow: "none"
             }
         }
     }
