@@ -2,6 +2,7 @@
 import {
   Box,
   FormControl,
+  Grid,
   InputBase,
   Menu,
   MenuItem,
@@ -113,23 +114,22 @@ export default function Histogram() {
 
   return (
     <>
-      <FormControl hiddenLabel 
-      margin="dense"
-      >
-        <Select
-          IconComponent={ExpandMoreRoundedIcon}
-          onChange={handleSelectChange}
-          value={period}
-          labelId="select-period-label"
-          id="select-period-label"
-          label=""
-        >
-          <MenuItem value={"month"}
-          >За последний месяц</MenuItem>
-          <MenuItem value={"year"}>За последний год</MenuItem>
-          <MenuItem value={"6months"}>За последние 6 месяцев</MenuItem>
-        </Select>
-      </FormControl>
+      <Box sx={{ display: "flex", justifyContent: "right", paddingBottom: 2 }}>
+        <FormControl hiddenLabel margin="dense">
+          <Select
+            IconComponent={ExpandMoreRoundedIcon}
+            onChange={handleSelectChange}
+            value={period}
+            labelId="select-period-label"
+            id="select-period-label"
+            label=""
+          >
+            <MenuItem value={"month"}>За последний месяц</MenuItem>
+            <MenuItem value={"year"}>За последний год</MenuItem>
+            <MenuItem value={"6months"}>За последние 6 месяцев</MenuItem>
+          </Select>
+        </FormControl>
+      </Box>
       <Box
         sx={{
           width: "100%",
