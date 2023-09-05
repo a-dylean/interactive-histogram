@@ -15,3 +15,6 @@ npm run dev
 ```
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+# Screenshot
+
+<img width="446" alt="Graph_screenshot" src="https://github.com/a-dylean/interactive-histogram/assets/83976465/5c8fe40f-b5a5-4d7b-a2d8-b9c32216a012">
