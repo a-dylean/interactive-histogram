@@ -3,7 +3,7 @@ import { createTheme } from "@mui/material";
 export const theme = createTheme({
   typography: {
     fontFamily: "Manrope",
-    fontSize: 22
+    fontSize: 22,
   },
   components: {
     MuiSelect: {

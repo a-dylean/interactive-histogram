@@ -116,18 +116,10 @@ export default function Histogram() {
             }}
           >
             <MenuItem sx={{ display: "none" }} />
-            {period !== month && (
-              <MenuItem value={month}>
-                {month}
-              </MenuItem>
-            )}
-            {period !== year && (
-              <MenuItem value={year}>{year}</MenuItem>
-            )}
+            {period !== month && <MenuItem value={month}>{month}</MenuItem>}
+            {period !== year && <MenuItem value={year}>{year}</MenuItem>}
             {period !== halfYear && (
-              <MenuItem value={halfYear}>
-                {halfYear}
-              </MenuItem>
+              <MenuItem value={halfYear}>{halfYear}</MenuItem>
             )}
           </Select>
         </FormControl>
