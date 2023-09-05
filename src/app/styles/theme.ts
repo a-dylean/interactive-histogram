@@ -2,7 +2,8 @@ import { createTheme } from "@mui/material";
 
 export const theme = createTheme({
   typography: {
-    fontFamily: "inherit",
+    fontFamily: "Manrope",
+    fontSize: 22
   },
   components: {
     MuiSelect: {

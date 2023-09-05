@@ -3,7 +3,7 @@ import { Chart, registerables } from "chart.js";
 import { Box } from "@mui/material";
 
 Chart.register(...registerables);
-Chart.defaults.font.family = "var(--font-manrope)";
+Chart.defaults.font.family = "Manrope";
 Chart.defaults.font.size = 20;
 export const BarChart = ({ chartData }) => {
   return (
@@ -31,6 +31,9 @@ export const BarChart = ({ chartData }) => {
             display: false,
           },
           tooltip: {
+            titleFont: {
+              size: 20,
+            },
             backgroundColor: "#65FF8E",
             titleColor: "black",
             yAlign: "bottom",
@@ -42,7 +45,7 @@ export const BarChart = ({ chartData }) => {
             callbacks: {
               label: () => "",
               title(tooltipItems) {
-                return tooltipItems[0].parsed.y;
+                return (tooltipItems[0].parsed.y).toString();
               },
             },
           },
@@ -51,6 +54,7 @@ export const BarChart = ({ chartData }) => {
           y: {
             suggestedMin: 0,
             ticks: {
+              color: "black",
               callback: (value, index, values) => {
                 if (chartData?.labels?.length > 0) {
                   const max = Math.max(...chartData.datasets[0].data);
@@ -72,6 +76,7 @@ export const BarChart = ({ chartData }) => {
           },
           x: {
             ticks: {
+              color: "black",
               callback: (value, index, values) => {
                 if (chartData.labels.length >= 30) {
                   if (index === 0 || (index + 1) % 5 === 0)

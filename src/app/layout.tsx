@@ -1,13 +1,6 @@
 import type { Metadata } from 'next'
-import { Manrope } from 'next/font/google';
 import ThemeRegistry from "./themeRegistry";
 
-const manrope = Manrope({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-manrope',
-  weight: "400"
-})
 
 export const metadata: Metadata = {
   title: 'Interactive histogram',
@@ -20,7 +13,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={manrope.className}>
+    <html lang="en">
+      <head>
+      <style dangerouslySetInnerHTML={{__html: "@import url('https://fonts.googleapis.com/css2?family=Manrope&display=swap');"}} />
+      </head>
       <body>
       <ThemeRegistry options={{ key: 'mui' }}>
         {children}
