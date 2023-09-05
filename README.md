@@ -8,7 +8,7 @@ To mock up APIs and generate custom data I used [JSON Server](https://www.npmjs.
 npm run mockapi
 ```
 
-To run the development server:
+To run the development server use this command in a separate terminal:
 
 ```bash
 npm run dev
