@@ -1,4 +1,3 @@
-import ".//styles/globals.css";
 import Histogram from "./histogram";
 import { Container } from "@mui/material";
 

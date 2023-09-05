@@ -8,53 +8,48 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { BarChart } from "./barChart";
-import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
-
-const convertArray = (sourceArray: { [key: string]: number }[]) => {
-  const sourceObject = sourceArray[0];
-  const resultArray = [];
-  for (const key in sourceObject) {
-    resultArray.push(sourceObject[key]);
-  }
-  return resultArray;
-};
-
-const makeLabels = (sourceArray: { [key: string]: number }[]) => {
-  const sourceObject = sourceArray[0];
-  const resultArray = [];
-  for (const key in sourceObject) {
-    resultArray.push(key);
-  }
-  return resultArray;
-};
+import { ArrowIcon } from "../app/components/icon";
+import { convertArray, makeLabels } from "./components/helpers";
+import { halfYear, month, year } from "./components/variables";
 
 export default function Histogram() {
-  const [period, setPeriod] = useState("За последний месяц");
+  const [period, setPeriod] = useState(month);
   const [data, setData] = useState({ datasets: [] });
+
   const handleSelectChange = (event: SelectChangeEvent) => {
     setPeriod(event.target.value);
   };
   useEffect(() => {
     const fetchData = async (period: string) => {
-      const res = await fetch(
-        "http://localhost:5000/periods"
-      );
+      const res = await fetch("http://localhost:5000/periods");
       if (!res.ok) {
         throw new Error("Failed to fetch data");
       }
       const data = await res.json();
-      const dataYear = convertArray(data.map((item: { graph: { year: number } }) => item.graph.year));
-      const labelsYear = makeLabels(data.map((item: { graph: { year: number } }) => item.graph.year));
+      const dataYear = convertArray(
+        data.map((item: { graph: { year: number } }) => item.graph.year)
+      );
+      const labelsYear = makeLabels(
+        data.map((item: { graph: { year: number } }) => item.graph.year)
+      );
       const data6months = convertArray(
-        data.map((item: { graph: { half_year: string; }; }) => item.graph.half_year)
+        data.map(
+          (item: { graph: { half_year: string } }) => item.graph.half_year
+        )
       );
       const labels6months = makeLabels(
-        data.map((item: { graph: { half_year: string; }; }) => item.graph.half_year)
+        data.map(
+          (item: { graph: { half_year: string } }) => item.graph.half_year
+        )
       );
-      const dataMonths = convertArray(data.map((item: { graph: { month: string } }) => item.graph.month));
-      const labelsMonth = makeLabels(data.map((item: { graph: { month: string } }) => item.graph.month));
+      const dataMonths = convertArray(
+        data.map((item: { graph: { month: string } }) => item.graph.month)
+      );
+      const labelsMonth = makeLabels(
+        data.map((item: { graph: { month: string } }) => item.graph.month)
+      );
       switch (period) {
-        case "За последний месяц":
+        case month:
           setData({
             labels: labelsMonth,
             datasets: [
@@ -64,7 +59,7 @@ export default function Histogram() {
             ],
           });
           break;
-        case "За последний год":
+        case year:
           setData({
             labels: labelsYear,
             datasets: [
@@ -74,7 +69,7 @@ export default function Histogram() {
             ],
           });
           break;
-        case "За последние 6 месяцев":
+        case halfYear:
           setData({
             labels: labels6months,
             datasets: [
@@ -101,35 +96,43 @@ export default function Histogram() {
 
   return (
     <>
-      <Box sx={{ display: "flex", justifyContent: "right", paddingBottom: 2, paddingtop: 2 }}>
-        <FormControl hiddenLabel 
-        margin="dense"
-        >
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "right",
+          paddingBottom: 2,
+          paddingtop: 2,
+        }}
+      >
+        <FormControl hiddenLabel margin="dense">
           <Select
-            IconComponent={ExpandMoreRoundedIcon}
+            IconComponent={ArrowIcon}
             onChange={handleSelectChange}
             value={period}
             labelId="select-period-label"
             id="select-period-label"
-            label=""
             renderValue={(selected) => {
               return selected;
             }}
           >
-            {period !== "За последний месяц" && <MenuItem value={"За последний месяц"}>За последний месяц</MenuItem>}
-            {period !== "За последний год" && <MenuItem value={"За последний год"}>За последний год</MenuItem>}
-            {period !== "За последние 6 месяцев" && <MenuItem value={"За последние 6 месяцев"}>За последние 6 месяцев</MenuItem>}
+            <MenuItem sx={{ display: "none" }} />
+            {period !== month && (
+              <MenuItem value={month}>
+                {month}
+              </MenuItem>
+            )}
+            {period !== year && (
+              <MenuItem value={year}>{year}</MenuItem>
+            )}
+            {period !== halfYear && (
+              <MenuItem value={halfYear}>
+                {halfYear}
+              </MenuItem>
+            )}
           </Select>
         </FormControl>
       </Box>
-      <Box
-        sx={{
-          background: "rgba(255, 0, 244.80, 0.05)",
-          borderRadius: "27px",
-        }}
-      >
-        <BarChart chartData={data} />
-      </Box>
+      <BarChart chartData={data} />
     </>
   );
 }

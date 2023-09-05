@@ -1,35 +1,18 @@
 import { createTheme } from "@mui/material";
-import { Manrope } from "next/font/google";
-
-const manrope = Manrope({
-    subsets: ['latin'],
-    display: 'swap',
-  })
 
 export const theme = createTheme({
   typography: {
-    //fontFamily: 'inherit',
-    fontFamily: manrope.style.fontFamily
+    fontFamily: "inherit",
   },
   components: {
-    MuiList: {
-      styleOverrides: {
-        padding: {
-          padding: 0,
-        },
-      },
-    },
     MuiSelect: {
       styleOverrides: {
-        icon: {
-          fill: "#000AFF",
-        },
         root: {
           border: "2px solid #000AFF",
           borderRadius: "28px",
-          padding: "3px",
           width: "380px",
           hight: "48px",
+          padding: "5px 16px",
         },
       },
     },
@@ -48,43 +31,42 @@ export const theme = createTheme({
         disableRipple: true,
       },
     },
+    MuiPopover: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: "#FFF",
+        },
+      },
+    },
     MuiMenuItem: {
       styleOverrides: {
         root: {
           "&.Mui-selected": {
             backgroundColor: "#FFF",
-            borderRadius: "28px",
-            background: "none"
+            background: "none",
           },
           "&:hover": {
             backgroundColor: "#FFF",
-            borderRadius: "28px",
-            background: "none"
+            background: "none",
           },
           "&.Mui-selected.Mui-focusVisible": {
             backgroundColor: "#FFF",
-            borderRadius: "28px",
-            background: "none"
+            background: "none",
           },
-          "&.Mui-selected:hover": {
+          "&.MuiSelect-outlined:hover": {
             backgroundColor: "#FFF",
-            borderRadius: "28px",
-            background: "none"
+            background: "none",
           },
           "&Mui-focused": {
-            background: "none"
-          }
+            background: "none",
+          },
         },
       },
     },
     MuiList: {
       styleOverrides: {
         root: {
-          borderLeft: "2px solid #000AFF",
-          borderRight: "2px solid #000AFF",
-          borderBottom: "2px solid #000AFF",
-          //borderTop: "1px solid #000AFF",
-          borderRadius: "28px",
+          padding: 0,
         },
       },
     },
@@ -92,15 +74,17 @@ export const theme = createTheme({
       styleOverrides: {
         paper: {
           borderRadius: "28px",
+          border: "2px solid #000AFF",
+          marginTop: "-1px",
         },
       },
     },
     MuiPaper: {
-        styleOverrides: {
-            root: {
-                boxShadow: "none"
-            }
-        }
-    }
+      styleOverrides: {
+        root: {
+          boxShadow: "none",
+        },
+      },
+    },
   },
 });
