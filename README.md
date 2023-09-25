@@ -1,6 +1,6 @@
 Interactive histogram component made Next.js and Chart.js. Histogram displays data depending on selected period in the dropdown menu.
 
-## Getting Started
+## How to run locally
 
 To mock up APIs and generate custom data I used [JSON Server](https://www.npmjs.com/package/json-server#getting-started). It is added as a dependency, so to start the server simply run:
 
