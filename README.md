@@ -1,4 +1,5 @@
-Interactive histogram component made Next.js and Chart.js. Histogram displays data depending on selected period in the dropdown menu.
+Interactive histogram component made Next.js and Chart.js. 
+Histogram has custom axes and displays data depending on selected period in the dropdown menu.
 
 ## How to run locally
 
